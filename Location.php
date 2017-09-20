@@ -12,7 +12,7 @@ use yii\base\NotSupportedException;
 /**
  * Location class
  */
-class Location /*extends \yii\base\Widget*/
+class Location
 {
 
     /**
@@ -39,11 +39,8 @@ class Location /*extends \yii\base\Widget*/
 
     /**
      * Returns the specified driver.
-     *
      * @param string $driver
-     *
      * @return Driver
-     *
      * @throws NotSupportedException
      */
     protected static function getDriver($driver)
