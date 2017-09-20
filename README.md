@@ -29,3 +29,5 @@ Once the extension is installed, simply use it in your code by  :
 
 ```php
 <?= \ap369\yii2location\AutoloadExample::widget(); ?>```
+=======
+
