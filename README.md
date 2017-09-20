@@ -28,7 +28,6 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-
 use ap369\yii2location\Location;
 
 use ap369\yii2location\Drivers\GeoPlugin;
@@ -52,7 +51,7 @@ $position = Location::get('44.85.3.2');
 
 Choosing the Driver : 
 
-You can use 3 driver to get position data : GeoPlugin, IpInfo, FreeGeoIp
+You can use one of three drivers to get position data : GeoPlugin, IpInfo, FreeGeoIp
 
 
 ```php
