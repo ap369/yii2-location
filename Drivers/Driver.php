@@ -2,7 +2,6 @@
 
 namespace ap369\yii2location\Drivers;
 
-//use Illuminate\Support\Fluent;
 use ap369\yii2location\Position;
 
 abstract class Driver
@@ -43,7 +42,7 @@ abstract class Driver
             $location = $this->fallback->get($ip);
         }
 
-        if ($location instanceof Fluent) {
+        if (is_array($location)) {
             $position = $this->hydrate(new Position(), $location);
 
             $position->driver = get_class($this);
@@ -86,18 +85,18 @@ abstract class Driver
      * instance using the drivers array map.
      *
      * @param Position $position
-     * @param Fluent   $location
+     * @param [] $location
      *
-     * @return \Stevebauman\Location\Position
+     * @return \ap369\yii2location\Position
      */
-    abstract protected function hydrate(Position $position, Fluent $location);
+    abstract protected function hydrate(Position $position, $location);
 
     /**
      * Process the specified driver.
      *
      * @param string $ip
      *
-     * @return Fluent|bool
+     * @return array|bool
      */
     abstract protected function process($ip);
 }
