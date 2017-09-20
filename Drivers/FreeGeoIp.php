@@ -2,7 +2,6 @@
 
 namespace ap369\yii2location\Drivers;
 
-//use Illuminate\Support\Fluent;
 use ap369\yii2location\Position;
 
 class FreeGeoIp extends Driver

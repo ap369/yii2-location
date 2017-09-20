@@ -8,14 +8,12 @@ abstract class Driver
 {
     /**
      * The fallback driver.
-     *
      * @var Driver
      */
     protected $fallback;
 
     /**
      * Append a fallback driver to the end of the chain.
-     *
      * @param Driver $handler
      */
     public function fallback(Driver $handler)
@@ -29,9 +27,7 @@ abstract class Driver
 
     /**
      * Handle the driver request.
-     *
      * @param string $ip
-     *
      * @return Position|bool
      */
     public function get($ip)
@@ -53,9 +49,7 @@ abstract class Driver
 
     /**
      * Returns url content as string.
-     *
      * @param string $url
-     *
      * @return mixed
      */
     protected function getUrlContent($url)
@@ -73,7 +67,6 @@ abstract class Driver
 
     /**
      * Returns the URL to use for querying the current driver.
-     *
      * @return string
      */
     abstract protected function url();
@@ -81,19 +74,15 @@ abstract class Driver
     /**
      * Hydrates the position with the given location
      * instance using the drivers array map.
-     *
      * @param Position $position
      * @param [] $location
-     *
      * @return \ap369\yii2location\Position
      */
     abstract protected function hydrate(Position $position, $location);
 
     /**
      * Process the specified driver.
-     *
      * @param string $ip
-     *
      * @return array|bool
      */
     abstract protected function process($ip);
