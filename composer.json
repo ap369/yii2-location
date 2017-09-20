@@ -1,0 +1,21 @@
+{
+    "name": "ap369/yii2-location",
+    "description": "Yii2 location extension, retrieve a users location from their IP address using external web services",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","ip","location"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed SAIDI",
+            "email": "saidi.ahmed.ing@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ap369\\yii2location\\": ""
+        }
+    }
+}
