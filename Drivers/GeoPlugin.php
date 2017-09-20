@@ -2,8 +2,7 @@
 
 namespace ap369\yii2location\Drivers;
 
-use Illuminate\Support\Fluent;
-use Stevebauman\Location\Position;
+use ap369\yii2location\Position;
 
 class GeoPlugin extends Driver
 {
@@ -12,13 +11,13 @@ class GeoPlugin extends Driver
      */
     protected function url()
     {
-        return 'http://www.geoplugin.net/php.gp?ip=';
+        return 'http://www.geoplugin.net/json.gp?ip=';
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function hydrate(Position $position, Fluent $location)
+    protected function hydrate(Position $position, $location)
     {
         $position->countryCode = $location->geoplugin_countryCode;
         $position->countryName = $location->geoplugin_countryName;
@@ -38,9 +37,8 @@ class GeoPlugin extends Driver
     protected function process($ip)
     {
         try {
-            $response = unserialize($this->getUrlContent($this->url().$ip));
-
-            return new Fluent($response);
+            $response = json_decode($this->getUrlContent($this->url().$ip));
+            return $response;
         } catch (\Exception $e) {
             return false;
         }
