@@ -19,12 +19,13 @@ class IpInfo extends Driver
      */
     protected function hydrate(Position $position, $location)
     {
+
         $position->countryCode = $location['country'];
         $position->regionName = $location['region'];
         $position->cityName = $location['city'];
-        $position->zipCode = $location['postal'];
+        //$position->zipCode = $location['postal'];
 
-        if ($location->loc) {
+        if ($location['loc']) {
             $coords = explode(',', $location['loc']);
 
             if (array_key_exists(0, $coords)) {
@@ -45,8 +46,7 @@ class IpInfo extends Driver
     protected function process($ip)
     {
         try {
-            $response = json_decode($this->getUrlContent($this->url().$ip.'/json'));
-
+            $response = json_decode($this->getUrlContent($this->url().$ip.'/json'),true);
             return $response;
         } catch (\Exception $e) {
             return false;

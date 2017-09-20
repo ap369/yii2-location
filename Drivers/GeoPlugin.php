@@ -19,14 +19,14 @@ class GeoPlugin extends Driver
      */
     protected function hydrate(Position $position, $location)
     {
-        $position->countryCode = $location->geoplugin_countryCode;
-        $position->countryName = $location->geoplugin_countryName;
-        $position->regionName = $location->geoplugin_regionName;
-        $position->regionCode = $location->geoplugin_regionCode;
-        $position->cityName = $location->geoplugin_city;
-        $position->latitude = $location->geoplugin_latitude;
-        $position->longitude = $location->geoplugin_longitude;
-        $position->areaCode = $location->geoplugin_areaCode;
+        $position->countryCode = $location['geoplugin_countryCode'];
+        $position->countryName = $location['geoplugin_countryName'];
+        $position->regionName = $location['geoplugin_regionName'];
+        $position->regionCode = $location['geoplugin_regionCode'];
+        $position->cityName = $location['geoplugin_city'];
+        $position->latitude = $location['geoplugin_latitude'];
+        $position->longitude = $location['geoplugin_longitude'];
+        $position->areaCode = $location['geoplugin_areaCode'];
 
         return $position;
     }
@@ -37,7 +37,7 @@ class GeoPlugin extends Driver
     protected function process($ip)
     {
         try {
-            $response = json_decode($this->getUrlContent($this->url().$ip));
+            $response = json_decode($this->getUrlContent($this->url().$ip),true);
             return $response;
         } catch (\Exception $e) {
             return false;

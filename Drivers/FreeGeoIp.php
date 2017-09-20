@@ -27,7 +27,7 @@ class FreeGeoIp extends Driver
         $position->latitude = (string) $location['latitude'];
         $position->longitude = (string) $location['longitude'];
         $position->metroCode = (string) $location['metro_code'];
-        $position->areaCode = $location['area_code'];
+        //$position->areaCode = $location['area_code'];
 
         return $position;
     }

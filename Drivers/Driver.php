@@ -44,9 +44,7 @@ abstract class Driver
 
         if (is_array($location)) {
             $position = $this->hydrate(new Position(), $location);
-
             $position->driver = get_class($this);
-
             return $position;
         }
 

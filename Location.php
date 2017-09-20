@@ -21,7 +21,7 @@ class Location /*extends \yii\base\Widget*/
     public static function get($ip = null,$driver = null){
 
         if($ip == null) $ip = \Yii::$app->request->getUserIP();
-        if($driver == null) $driver = "IpInfo";
+        if($driver == null) $driver = IpInfo::class;
 
         return self::getLocation($ip,$driver);
     }
@@ -48,11 +48,11 @@ class Location /*extends \yii\base\Widget*/
      */
     protected static function getDriver($driver)
     {
-        if (class_exists($driver)) {
+       if (class_exists($driver)) {
             return new $driver();
-        }
+       }
 
-        throw new NotSupportedException("The driver [{$driver}] does not exist.");
+       throw new NotSupportedException("The driver [{$driver}] does not exist.");
     }
 
 
