@@ -9,14 +9,6 @@ class IpInfo extends Driver
     /**
      * {@inheritdoc}
      */
-    protected function url()
-    {
-        return 'http://ipinfo.io/';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function hydrate(Position $position, $location)
     {
 
@@ -26,14 +18,14 @@ class IpInfo extends Driver
         //$position->zipCode = $location['postal'];
 
         if ($location['loc']) {
-            $coords = explode(',', $location['loc']);
+            $coordinates = explode(',', $location['loc']);
 
-            if (array_key_exists(0, $coords)) {
-                $position->latitude = $coords[0];
+            if (array_key_exists(0, $coordinates)) {
+                $position->latitude = $coordinates[0];
             }
 
-            if (array_key_exists(1, $coords)) {
-                $position->longitude = $coords[1];
+            if (array_key_exists(1, $coordinates)) {
+                $position->longitude = $coordinates[1];
             }
         }
 
@@ -46,10 +38,17 @@ class IpInfo extends Driver
     protected function process($ip)
     {
         try {
-            $response = json_decode($this->getUrlContent($this->url().$ip.'/json'),true);
-            return $response;
+            return json_decode($this->getUrlContent($this->url() . $ip . '/json'), true);
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function url()
+    {
+        return 'http://ipinfo.io/';
     }
 }

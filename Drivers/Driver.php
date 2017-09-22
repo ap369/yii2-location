@@ -13,12 +13,34 @@ abstract class Driver
     protected $fallback;
 
     /**
+     * Returns the URL to use for querying the current driver.
+     * @return string
+     */
+    abstract protected function url();
+
+    /**
+     * Process the specified driver.
+     * @param string $ip
+     * @return array|bool
+     */
+    abstract protected function process($ip);
+
+    /**
+     * Hydrates the position with the given location
+     * instance using the drivers array map.
+     * @param Position $position
+     * @param [] $location
+     * @return \ap369\yii2location\Position
+     */
+    abstract protected function hydrate(Position $position, $location);
+
+    /**
      * Append a fallback driver to the end of the chain.
      * @param Driver $handler
      */
     public function fallback(Driver $handler)
     {
-        if (is_null($this->fallback)) {
+        if ($this->fallback === null) {
             $this->fallback = $handler;
         } else {
             $this->fallback->fallback($handler);
@@ -41,6 +63,7 @@ abstract class Driver
         if (is_array($location)) {
             $position = $this->hydrate(new Position(), $location);
             $position->driver = get_class($this);
+
             return $position;
         }
 
@@ -65,25 +88,4 @@ abstract class Driver
         return $urlContent;
     }
 
-    /**
-     * Returns the URL to use for querying the current driver.
-     * @return string
-     */
-    abstract protected function url();
-
-    /**
-     * Hydrates the position with the given location
-     * instance using the drivers array map.
-     * @param Position $position
-     * @param [] $location
-     * @return \ap369\yii2location\Position
-     */
-    abstract protected function hydrate(Position $position, $location);
-
-    /**
-     * Process the specified driver.
-     * @param string $ip
-     * @return array|bool
-     */
-    abstract protected function process($ip);
 }
