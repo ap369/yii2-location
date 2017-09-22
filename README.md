@@ -1,6 +1,6 @@
 Yii2 location extension
 ====================================================================================================
-Retrieve a users location from their IP address using external web services
+Retrieve a user's location from their IP address using an external web services
 
 Installation
 ------------
@@ -25,46 +25,41 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+Once the extension is installed, use it in your code like this:
 
 ```php
-use ap369\yii2location\Location;
-
-use ap369\yii2location\Drivers\GeoPlugin;
-use ap369\yii2location\Drivers\IpInfo;
-use ap369\yii2location\Drivers\FreeGeoIp;
-
-```
-```php
-$position = Location::get(); 
+$position = Location::get('44.85.3.2'); 
 
 echo $position->latitude;
 echo $position->longitude;
 
 ```
 
-With given IP address : 
+If you don't provide an IP address, it will default to `Yii::$app->request->userIP`.
+
+Additionally, you can chose what driver will be used to resolve the IP
+address location, by passing its class as the second parameter.
 
 ```php
-$position = Location::get('44.85.3.2'); 
+$position =  Location::get('44.85.3.2', FreeGeoIp::class);
 ```
 
-Choosing the Driver : 
-
-You can use one of three drivers to get position data : GeoPlugin, IpInfo, FreeGeoIp
-
+You can also pass `null` as the address to have it automatically resolved:
 
 ```php
 $position =  Location::get(null,GeoPlugin::class); // position from GeoPluin
-$position =  Location::get('44.85.3.2',FreeGeoIp::class);  // position from FreeGeoIp
-
 ```
 
+Supported drivers
+-----------------
 
-This extension is based on stevebauman/location laravel extention.
-https://github.com/stevebauman/location
+Currently, the following drivers are supported by this extension:
 
+* IpInfo (default)
+* GeoPlugin
+* FreeGeoIp
 
+Acknowledgment
+--------------
 
-
-
+This extension is based on [stevebauman/location](https://github.com/stevebauman/location) laravel extension.

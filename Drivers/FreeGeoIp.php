@@ -9,23 +9,16 @@ class FreeGeoIp extends Driver
     /**
      * {@inheritdoc}
      */
-    protected function url()
-    {
-        return 'http://freegeoip.net/json/';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function hydrate(Position $position,  $location)
+    protected function hydrate(Position $position, $location)
     {
         $position->countryCode = $location['country_code'];
         $position->regionName = $location['region_name'];
         $position->cityName = $location['city'];
         $position->zipCode = $location['zip_code'];
-        $position->latitude = (string) $location['latitude'];
-        $position->longitude = (string) $location['longitude'];
-        $position->metroCode = (string) $location['metro_code'];
+        $position->latitude = (string)$location['latitude'];
+        $position->longitude = (string)$location['longitude'];
+        $position->metroCode = (string)$location['metro_code'];
+
         //$position->areaCode = $location['area_code'];
 
         return $position;
@@ -37,11 +30,17 @@ class FreeGeoIp extends Driver
     protected function process($ip)
     {
         try {
-            $response = json_decode($this->getUrlContent($this->url().$ip), true);
-
-            return $response;
+            return json_decode($this->getUrlContent($this->url() . $ip), true);
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function url()
+    {
+        return 'http://freegeoip.net/json/';
     }
 }

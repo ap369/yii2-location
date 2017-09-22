@@ -9,14 +9,6 @@ class GeoPlugin extends Driver
     /**
      * {@inheritdoc}
      */
-    protected function url()
-    {
-        return 'http://www.geoplugin.net/json.gp?ip=';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function hydrate(Position $position, $location)
     {
         $position->countryCode = $location['geoplugin_countryCode'];
@@ -37,10 +29,17 @@ class GeoPlugin extends Driver
     protected function process($ip)
     {
         try {
-            $response = json_decode($this->getUrlContent($this->url().$ip),true);
-            return $response;
+            return json_decode($this->getUrlContent($this->url() . $ip), true);
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function url()
+    {
+        return 'http://www.geoplugin.net/json.gp?ip=';
     }
 }

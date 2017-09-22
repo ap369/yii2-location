@@ -1,6 +1,6 @@
 {
     "name": "ap369/yii2-location",
-    "description": "Yii2 location extension, retrieve a users location from their IP address using external web services",
+    "description": "Yii2 location extension, retrieve a user's location from their IP address using an external web services",
     "type": "yii2-extension",
     "keywords": ["yii2","extension","ip","location"],
     "license": "MIT",
